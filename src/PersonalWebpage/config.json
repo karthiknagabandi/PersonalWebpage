@@ -1,5 +1,8 @@
 {
   "MailSettings": {
-    "ToAddress": "karthiknagabandi1@gmail.com"
+    "ToAddress": "knagab2@@gmail.com"
+  },
+  "ConnnectionStrings": {
+    "WorldContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorld;Trusted_Connection=true;MultipleActiveResultSets=true"
   }
 }

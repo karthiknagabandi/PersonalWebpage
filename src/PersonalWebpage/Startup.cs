@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PersonalWebpage.Service;
 using Microsoft.Extensions.Configuration;
+using PersonalWebpage.Models;
 
 namespace PersonalWebpage
 {
@@ -41,8 +42,6 @@ namespace PersonalWebpage
 
             //AddScoped - create an instance of debugmail for each set of requests and reused during the requests
             //AddSingleton  - create on instance the first time we needed and pass that instance over and over again
-
-            //
             services.AddSingleton(_config);
 
             if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
@@ -54,14 +53,22 @@ namespace PersonalWebpage
                 // Implement the service
             }
 
+            //wiring up EF interface and also wiring Context
+            // context now is injectable to different parts of the project
+            services.AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+            ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
             //MiddleWare
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,7 +82,10 @@ namespace PersonalWebpage
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "App", action = "Index"}
                     );
-            });  
+            });
+
+            // calling wait to make is a sync process
+            seeder.EnsureSeedData().Wait(); 
         }
     }
 }
