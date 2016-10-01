@@ -59,23 +59,32 @@ namespace PersonalWebpage
 
             services.AddTransient<WorldContextSeedData>();
 
+            // expensive to create the context class that we need in repo , so creating one per request cycle
+            services.AddScoped<IWorldRepository, WorldRepository>();
+
+            services.AddLogging();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            ILoggerFactory loggerFactory, WorldContextSeedData seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
             //MiddleWare
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Error);
             }
 
             app.UseStaticFiles();
 
+            // Routing
             app.UseMvc(config => {
                 config.MapRoute(
                     name: "Default",
