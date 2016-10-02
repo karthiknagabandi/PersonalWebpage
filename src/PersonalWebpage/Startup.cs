@@ -10,6 +10,10 @@ using Microsoft.Extensions.Logging;
 using PersonalWebpage.Service;
 using Microsoft.Extensions.Configuration;
 using PersonalWebpage.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using PersonalWebpage.ViewModels;
 
 namespace PersonalWebpage
 {
@@ -62,15 +66,36 @@ namespace PersonalWebpage
             // expensive to create the context class that we need in repo , so creating one per request cycle
             services.AddScoped<IWorldRepository, WorldRepository>();
 
+            //Adding as a transient because it doesnot have its own state
+            //so when we ask for it later we get a copy of this service
+            services.AddTransient<GeoCoordsService>();
+
             services.AddLogging();
 
             services.AddMvc();
+
+            //services.AddMvc(
+            //    AddJsonOptions(config =>
+            //    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //        ));
+        }
+
+        private Action<MvcOptions> AddJsonOptions()
+        {
+            throw new NotImplementedException();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
             //MiddleWare
+            //Creating a Mapping to Convert ViewModel data to View and ViceVersa
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stops>().ReverseMap();
+            });
+
 
             if (env.IsDevelopment())
             {
