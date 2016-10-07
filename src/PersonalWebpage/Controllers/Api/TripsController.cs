@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalWebpage.Models;
@@ -11,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace PersonalWebpage.Controllers.Api
 {
-    //[Route("api/trips")]
+    [Route("api/trips")]
+    [Authorize]
     public class TripsController: Controller
     {
         private ILogger _logger;
@@ -32,13 +34,13 @@ namespace PersonalWebpage.Controllers.Api
             _logger = logger;
         }
 
-        [HttpGet("api/trips")]
+        [HttpGet("")]
         public IActionResult Get()
         {
             //Example for Error Handling using IActionResult: if (true) return BadRequest("Bad things Happen");
             try
             {
-                var results = _repository.GetAllTrips();
+                var results = _repository.GetTripsByUserName(this.User.Identity.Name);
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
             catch(Exception ex)
@@ -50,7 +52,7 @@ namespace PersonalWebpage.Controllers.Api
         }
 
         //[FromBody]-Providing from where the data is coming from -- In PostMan (the data is entered in the Body section)
-        [HttpPost("api/trips")]
+        [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]TripViewModel theTrip)
         {
 
@@ -64,6 +66,7 @@ namespace PersonalWebpage.Controllers.Api
                 // Trip object, which is view is generated from the theTrip which is viewModel
 
                 var newTrip = Mapper.Map<Trip>(theTrip);
+                newTrip.UserName = User.Identity.Name;
                 _repository.AddTrip(newTrip);
                 //return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
 

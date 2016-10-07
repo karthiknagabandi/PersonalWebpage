@@ -10,13 +10,23 @@
 </head>
 <body>
     <div id="Sidebar">
-        <img src="~/img/USER.JPG" alt="HeadShot" class="Headshot" />
-        <span id="username"> Karthik Nagabandi </span>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <img src="~/img/USER.JPG" alt="HeadShot" class="Headshot" />
+            <span id="username"> @User.Identity.Name </span>
+        }
         <ul class="nav">
             <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
             <li><a asp-controller="App" asp-action="About">About</a></li>
             <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
+                <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+            }
+            
         </ul>
+
     </div>
 
     <div id="wrapper">
@@ -43,7 +53,7 @@
                             Print
                         </a>
                     </li>
-                    
+
 
                 </ul>
             </div>
@@ -56,7 +66,7 @@
             <div class="navbar navbar-fixed-bottom">
                 <h4 class="text-center text-info"> &copy; 2016 Karthik Nagabandi </h4>
             </div>
-            
+
         </div>
     </div>
 

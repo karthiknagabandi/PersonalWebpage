@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using PersonalWebpage.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace PersonalWebpage
 {
@@ -70,9 +72,44 @@ namespace PersonalWebpage
             //so when we ask for it later we get a copy of this service
             services.AddTransient<GeoCoordsService>();
 
+            //configuring Identity services
+            services.AddIdentity<WorldUser, IdentityRole>(config =>
+             {
+                 config.User.RequireUniqueEmail = true;
+                 config.Password.RequiredLength = 8;
+                 config.Cookies.ApplicationCookie.LoginPath = "/auth/Login";
+                 config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+                 {
+                     OnRedirectToLogin = async ctx =>
+                     {
+                         if(ctx.Request.Path.StartsWithSegments("/api") && ctx.Response.StatusCode == 200)
+                         {
+                             ctx.Response.StatusCode = 401;
+                         }
+                         else
+                         {
+                             ctx.Response.Redirect(ctx.RedirectUri);
+                         }
+                         //go ahead and let the task complete
+                         await Task.Yield();
+                     }
+                 };
+             })
+             .AddEntityFrameworkStores<WorldContext>();
+
             services.AddLogging();
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                if(_env.IsProduction())
+                {
+                    config.Filters.Add(new RequireHttpsAttribute());
+                }                
+            })
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             //services.AddMvc(
             //    AddJsonOptions(config =>
@@ -89,6 +126,12 @@ namespace PersonalWebpage
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
             //MiddleWare
+            //The order of services is important
+
+            app.UseStaticFiles();
+
+            app.UseIdentity();
+
             //Creating a Mapping to Convert ViewModel data to View and ViceVersa
             Mapper.Initialize(config =>
             {
@@ -107,7 +150,7 @@ namespace PersonalWebpage
                 loggerFactory.AddDebug(LogLevel.Error);
             }
 
-            app.UseStaticFiles();
+            
 
             // Routing
             app.UseMvc(config => {

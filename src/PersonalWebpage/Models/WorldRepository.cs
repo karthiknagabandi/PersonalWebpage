@@ -19,9 +19,9 @@ namespace PersonalWebpage.Models
             _logger = logger;
         }
 
-        public void AddStop(string tripName, Stops newStop)
+        public void AddStop(string tripName, Stops newStop, string username)
         {
-            var trip = GetTripByName(tripName);
+            var trip = GetUserTripByName(tripName, username);
             if(trip !=null)
             {
                 //Settings as Foreign Key
@@ -49,6 +49,21 @@ namespace PersonalWebpage.Models
                 .Include(t => t.Stops)
                 .Where(t=> t.Name == tripName)
                 .FirstOrDefault();
+        }
+
+        public IEnumerable<Trip> GetTripsByUserName(string name)
+        {
+            return _context.Trips                
+                .Where(t => t.UserName == name)
+                .ToList();
+        }
+
+        public Trip GetUserTripByName(string tripName, string name)
+        {
+            return _context.Trips
+               .Include(t => t.Stops)
+               .Where(t => t.Name == tripName && t.UserName == name)
+               .FirstOrDefault();
         }
 
         public async Task<bool> SaveChangesAsync()

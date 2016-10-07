@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalWebpage.Models;
@@ -12,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace PersonalWebpage.Controllers.Api
 {
-    [Route("api/trips/{tripName}/stops")]
+    [Authorize]
+    [Route("api/trips/{tripName}/stops")]   
     public class StopsController: Controller
     {
         private GeoCoordsService _coordsService;
@@ -31,7 +33,8 @@ namespace PersonalWebpage.Controllers.Api
         {
             try
             {
-                var trip = _repository.GetTripByName(tripName);
+                //var trip = _repository.GetAllTrips();
+                var trip = _repository.GetUserTripByName(tripName, User.Identity.Name);
                 return Ok(Mapper.Map<IEnumerable<StopViewModel>>(trip.Stops.OrderBy(s => s.Order).ToList()));
             }
             catch(Exception ex)
@@ -64,7 +67,7 @@ namespace PersonalWebpage.Controllers.Api
                         newStop.Latitude = result.Latitude;
                         newStop.Longitude = result.Logitude;
                         //Save it DB
-                        _repository.AddStop(tripName, newStop);
+                        _repository.AddStop(tripName, newStop, User.Identity.Name);
 
                         if (await _repository.SaveChangesAsync())
                         {

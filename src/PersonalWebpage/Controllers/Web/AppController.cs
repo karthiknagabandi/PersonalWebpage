@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PersonalWebpage.Models;
@@ -31,7 +32,28 @@ namespace PersonalWebpage.Controllers.Web
         public IActionResult Index()
         {
             //_context is going to query the DB and gets a list of all the trips as trip classes
-            // _context will convert  " _context.Trips.ToList() " into a query that is appropriate for the DB that we are using 
+            // _context will convert  " _context.Trips.ToList() " into a query that is appropriate for the DB that we are using
+            // -- Commenting out to use Authorization pages --  
+            //try
+            //{
+            //    var data = _repository.GetAllTrips();
+
+            //    return View(data);
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError($"Failed to get trips in index page: {ex.Message}");
+            //    return Redirect("/error");
+            //}
+
+            return View();
+        } 
+
+        [Authorize]
+        public IActionResult Trips()
+        {
+            // Creating another page for authorization instead of directly using the index page
             try
             {
                 var data = _repository.GetAllTrips();
@@ -44,7 +66,7 @@ namespace PersonalWebpage.Controllers.Web
                 _logger.LogError($"Failed to get trips in index page: {ex.Message}");
                 return Redirect("/error");
             }
-        } 
+        }
 
         public IActionResult Contact()
         {
