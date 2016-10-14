@@ -54,18 +54,20 @@ namespace PersonalWebpage.Controllers.Web
         public IActionResult Trips()
         {
             // Creating another page for authorization instead of directly using the index page
-            try
-            {
-                var data = _repository.GetAllTrips();
+            //commenting this to use the angular control
+            //try
+            //{
+            //    var data = _repository.GetAllTrips();
 
-                return View(data);
+            //    return View(data);
 
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to get trips in index page: {ex.Message}");
-                return Redirect("/error");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError($"Failed to get trips in index page: {ex.Message}");
+            //    return Redirect("/error");
+            //}
+            return View();
         }
 
         public IActionResult Contact()

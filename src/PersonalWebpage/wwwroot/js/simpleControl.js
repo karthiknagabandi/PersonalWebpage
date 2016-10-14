@@ -9,12 +9,14 @@
 
     function waitCursor() {
         return {
-            templateUrl: "/view/waitCursor.html"
+            //scope name is what is visible inside the template
+            // name is the consumer of the directive in trips Controller 
+            scope: {
+                show: "=displayWhen"
+            },
+            restrict : "E",
+            templateUrl: "/views/waitCursor.html"
         };
 
     }
-
-
-
-
 })();

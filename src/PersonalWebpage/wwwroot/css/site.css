@@ -75,13 +75,13 @@ input[type=submit] {
     transition: left ease .25s;
 }
 
-    #Sidebar.hide-sidebar {
-        left: -250px;
-        -moz-transition: left ease .25s;
-        -o-transition: left ease .25s;
-        -webkit-transition: left ease .25s;
-        transition: left ease .25s;
-    }
+#Sidebar.hide-sidebar {
+    left: -250px;
+    -moz-transition: left ease .25s;
+    -o-transition: left ease .25s;
+    -webkit-transition: left ease .25s;
+    transition: left ease .25s;
+}
 
 #wrapper.hide-sidebar {
     margin-left: 0;
@@ -89,4 +89,9 @@ input[type=submit] {
     -o-transition: margin-left ease .25s;
     -webkit-transition: margin-left ease .25s;
     transition: margin-left ease .25s;
+}
+
+#map {
+    width: 100%;
+    height: 600px;
 }
