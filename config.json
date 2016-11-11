@@ -1,0 +1,11 @@
+{
+  "MailSettings": {
+    "ToAddress": "knagab2@@gmail.com"
+  },
+  "ConnnectionStrings": {
+    "WorldContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorld;Trusted_Connection=true;MultipleActiveResultSets=true"
+  },
+  "Keys": {
+    "BingKey": "DONOTPUTKEYSINSOURCECONTROL"
+  }
+}

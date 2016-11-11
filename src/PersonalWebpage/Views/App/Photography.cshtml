@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Photography";
+}
+
+<html>
+<head>
+    <link type="text/css" href="~/lib/lightGallery/src/css/lightgallery.css" rel="stylesheet" />
+    <link type="text/css" href="~/css/photography.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/lightGallery/dist/js/lightgallery.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/lightGallery/demo/js/lg-thumbnail.min.js"></script>
+    <script type="text/javascript" src="~/lib/lightGallery/demo/js/lg-fullscreen.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/holder/2.9.0/holder.min.js"> </script>
+
+</head>
+
+<body>
+
+    <div class="cont">
+        <div class="page-head">
+            <h1>Photography</h1>
+            <p class="lead">Travel Images</p>
+        </div>
+
+        <div class="demo-gallery">
+            <ul id="lightgallery">
+
+                @*<li data-src="~/img/IMG_2445.jpg">
+                    <img src="~/img/IMG_2445_tn.jpg" />
+                </li>*@
+
+
+                <li data-src="/img/IMG_2445.JPG"
+                    data-sub-html="<h4>Concrete Jungle at Night</h4><p>Classic view from top of Seattle's Iconic building the 'Space Needle'</p>">
+                    <a href="">
+                        <img class="img-responsive" src="~/img/IMG_2445_tn.jpg">
+                        <div class="demo-gallery-poster">
+                            <img src="~/img/zoom_color.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-src="/img/IMG_2704.JPG"
+                    data-sub-html="<h4>The Trail</h4><p>A beautiful morning cruise taken En-route to San Juan Islands</p>">
+                    <a href="">
+                        <img class="img-responsive" src="~/img/IMG_2704_tn.jpg">
+                        <div class="demo-gallery-poster">
+                            <img src="~/img/zoom_color.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-src="/img/IMG_2767.JPG"
+                    data-sub-html="<h4>Colors</h4><p>A colorful garden in San Juan Islands</p>">
+                    <a href="">
+                        <img class="img-responsive" src="~/img/IMG_2767_tn.jpg">
+                        <div class="demo-gallery-poster">
+                            <img src="~/img/zoom_color.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-src="/img/IMG_2982.JPG"
+                    data-sub-html="<h4>Peace</h4><p>The iconic Mountain at peace</p>">
+                    <a href="">
+                        <img class="img-responsive" src="~/img/IMG_2982_tn.jpg">
+                        <div class="demo-gallery-poster">
+                            <img src="~/img/zoom_color.png">
+                        </div>
+                    </a>
+                </li>
+
+                <li data-src="/img/IMG_3121.JPG"
+                    data-sub-html="<h4>Calmness</h4><p>Beautiful morning</p>">
+                    <a href="">
+                        <img class="img-responsive" src="~/img/IMG_3121_tn.jpg">
+                        <div class="demo-gallery-poster">
+                            <img src="~/img/zoom_color.png">
+                        </div>
+                    </a>
+                </li>
+
+
+
+            </ul>
+
+            <span class="small">Click on any of the images to see Gallery</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+                    $("#lightgallery").lightGallery();
+    </script>
+
+
+</body>
+
+</html>
+
+

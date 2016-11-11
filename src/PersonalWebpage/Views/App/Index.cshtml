@@ -1,13 +1,27 @@
 ﻿@model IEnumerable<PersonalWebpage.Models.Trip>
 
 
-@{ 
+@{
     ViewBag.Title = "Home Page";
 }
 
+
+
+
 <div class="row">
-    <div>
-        <h1> Welcome </h1>
-        <a asp-controller ="App" asp-action="Trips" class="btn btn-lg btn-success"> View My Trips </a>
+    <div class="twelve columns">
+        <p>
+            Welcome to my personal webpage!
+        </p> <br>
+        <p>
+            I am Software Developer with Master's in Computer Science. <br>
+            <span> I enjoy web programming and mobile app development. You can explore this website to know a little more about me ;) </span> 
+        </p>
+        @*<a asp-controller="App" asp-action="trips" class="btn btn-lg btn-success">View My Trips</a>*@
+
     </div>
 </div>
+
+
+
+

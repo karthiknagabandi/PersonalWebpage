@@ -7,30 +7,71 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/lib/bootswatch/yeti/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/photoswipe/dist/photoswipe.css" />
 </head>
 <body>
     <div id="Sidebar">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <img src="~/img/USER.JPG" alt="HeadShot" class="Headshot" />
-            <span id="username"> @User.Identity.Name </span>
-        }
-        <ul class="nav">
-            <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
-            <li><a asp-controller="App" asp-action="About">About</a></li>
-            <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
-            @if (User.Identity.IsAuthenticated)
+
+        <img src="~/img/USER.JPG" alt="HeadShot" class="Headshot" />
+        <span id="username"> @User.Identity.Name </span>
+
+        @*@if (User.Identity.IsAuthenticated)
             {
-                <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
-                <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
-            }
-            
-        </ul>
+                <img src="~/img/USER.JPG" alt="HeadShot" class="Headshot" />
+                <span id="username"> @User.Identity.Name </span>
+            }*@
+
+
+        @*<ul class="nav">
+                <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+                <li><a asp-controller="App" asp-action="About">About</a></li>
+                <li><a asp-controller="App" asp-action="Photography">Photography</a></li>
+                <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
+                    <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                }
+
+            </ul>*@
 
     </div>
 
+
+
+
+
     <div id="wrapper">
+        @*navigation tag*@
         <nav class="navbar navbar-inverse">
+
+            <a asp-controller="App" asp-action="Index" class="navbar-brand"> Karthik Nagabandi</a>
+
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+                <li><a asp-controller="App" asp-action="About">About</a></li>
+                <li><a asp-controller="App" asp-action="Resume">Résumé</a></li>
+                <li><a asp-controller="App" asp-action="Photography">Photography</a></li>
+                <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+                <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                }
+                else
+                {
+                    @*<a asp-controller="App" asp-action="trips" class="btn btn-lg btn-success">View My Trips</a>*@
+
+                    <li><a asp-controller="App" asp-action="trips">Login</a></li>
+                }
+
+            </ul>
+        </nav>
+
+
+        @*<nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
@@ -41,13 +82,13 @@
                 </ul>
                 <a asp-controller="App" asp-action="Index" class="navbar-brand"> Karthik Nagabandi</a>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    @*<li>
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="glyphicon glyphicon-floppy-save"></i>
                             Save
                         </a>
-                    </li>
-                    <li>
+                    </li>*@
+        @*<li>
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="glyphicon glyphicon-print"></i>
                             Print
@@ -57,7 +98,10 @@
 
                 </ul>
             </div>
-        </nav>
+            </nav>*@
+
+
+
         <div id="Main" class="container-fluid">
             @RenderBody()
         </div>
@@ -72,9 +116,21 @@
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/photoswipe/dist/photoswipe.min.js"></script>
     @RenderSection("scripts", false)
-    <script type="text/javascript" src="~/js/site.js"></script>
 
+    <environment names="Development">
+        <script type="text/javascript" src="~/js/site.js"></script>
+    </environment>
+
+    <environment names="Production,Staging">
+        <script type="text/javascript" src="~/lib/_app/site.js"></script>
+    </environment>
 
 </body>
+
+
+
+
+
 </html>

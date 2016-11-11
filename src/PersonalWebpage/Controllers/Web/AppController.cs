@@ -96,5 +96,18 @@ namespace PersonalWebpage.Controllers.Web
         {
             return View();
         }
+
+        public IActionResult Photography()
+        {
+            return View();
+        }
+
+        public IActionResult Resume()
+        {
+            return View();
+        }
+
+
+
     }
 }

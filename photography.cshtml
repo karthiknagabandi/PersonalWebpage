@@ -1,0 +1,103 @@
+<html>
+<head>
+    @*<style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img{
+            width: 70%;
+            margin: auto;
+        }
+    </style>*@
+
+    <link type="text/css" href="~/lib/lightGallery/src/css/lightgallery.css" rel="stylesheet" />
+
+</head>
+<body>
+    <h2> Photography </h2>
+
+
+
+    <div id="lightgallery">
+
+
+        <a href="~/lib/lightGallery/demo/img/1.jpg">
+            <img src="~/lib/lightGallery/demo/img/thumb-1.jpg" />
+        </a>
+
+        <a href="~/lib/lightGallery/demo/img/1.jpg">
+            <img src="~/lib/lightGallery/demo/img/thumb-1.jpg" />
+        </a>
+
+        @*<div class="item" data-src="~/lib/lightGallery/demo/img/1.jpg">
+            <img src="~/lib/lightGallery/demo/img/thumb-1.jpg" alt="thumb1" />
+        </div>*@
+
+
+
+    </div>
+
+
+
+    @*<div id="myCarousel" class="carousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <div class="item active">
+                    <img src="~/img/IMG_2445.JPG" alt="zero"  />
+                </div>
+
+                <div class="item">
+                    <img src="~/img/IMG_2704.JPG" alt="one"/>
+                </div>
+
+                <div class="item">
+                    <img src="~/img/IMG_2767.JPG" alt="three"/>
+                </div>
+
+                <div class="item">
+                    <img src="~/img/IMG_2982.JPG" alt="four"/>
+                </div>
+
+                <div class="item">
+                    <img src="~/img/IMG_3121.JPG" alt="four" />
+                </div>
+
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+
+        </div>*@
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/lightGallery/dist/js/lightgallery.min.js"></script>
+    <script type="text/javascript" src="~/lib/lightGallery/demo/js/lg-thumbnail.min.js"></script>
+    <script type="text/javascript" src="~/lib/lightGallery/demo/js/lg-fullscreen.min.js"></script>
+    <script type="text/javascript" src="~/js/photography.js"></script>
+    
+
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            $("#lightgallery").lightGallery();
+        });
+    </script>
+
+
+
+</body>
+
+</html>

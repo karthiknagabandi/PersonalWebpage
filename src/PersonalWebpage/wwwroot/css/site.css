@@ -48,6 +48,11 @@ input[type=submit] {
     padding: 3px;
 }
 
+.PhotoPic {
+      width: 50%;
+    height: 600px;
+}
+
 .Menu {
     font-size: 15px;
 }
@@ -61,7 +66,7 @@ input[type=submit] {
         }
 
 #Sidebar {
-    background: #92b6f7;
+    background: #ffffff;
     color: #0e0f10;
     position: fixed;
     height: 100%;
@@ -95,3 +100,15 @@ input[type=submit] {
     width: 100%;
     height: 600px;
 }
+
+.line-close {
+  margin-top: 20px;
+  height: 1px;
+  width: 100%;
+  background-color: #3498DB; }
+
+.line {
+  margin: -20px 0 20px 0;
+  height: 1px;
+  width: 100%;
+  background-color: #3498DB; }
